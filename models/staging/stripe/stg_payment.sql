@@ -1,15 +1,14 @@
 with payment as (
 
     select
-          ID
-        , ORDERID as order_id
-        , PAYMENTMETHOD
-        , STATUS
-        , AMOUNT
-        , CREATED
-        , _BATCHED_AT
-
-    from raw.stripe.payment
+        id as payment_id,
+        orderid as order_id,
+        paymentmethod as payment_method,
+        status,
+        -- amount is stored in cents, convert it to dollars
+        amount / 100 as amount,
+        created as created_at
+    from {{ source('stripe', 'payment') }}
 
 )
 
