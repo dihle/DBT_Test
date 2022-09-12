@@ -1,4 +1,4 @@
-with payment as (
+ with payment as (
     select * from {{ ref('stg_payment') }}
 ),
 
